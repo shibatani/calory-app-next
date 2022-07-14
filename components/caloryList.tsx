@@ -7,8 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function  CaloryList(props) {
+import { caloryProps } from '../types/calory'
 
+export default function CaloryList(props: caloryProps) {
   return (
     <div>
       <TableContainer sx={{ maxWidth: 800, margin: 'auto' }} component={Paper}>
@@ -24,7 +25,7 @@ export default function  CaloryList(props) {
           <TableBody>
           {props.calories.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.title}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
