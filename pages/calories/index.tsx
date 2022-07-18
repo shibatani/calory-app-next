@@ -13,7 +13,9 @@ export default function CaloriesListPage() {
       let data = []
       const caloriesSnapshot = await getDocs(collection(db, "calories"))
       caloriesSnapshot.forEach((calorySnapshot) => {
-        data.push(calorySnapshot.data())
+        const calory = calorySnapshot.data()
+        calory["id"] = calorySnapshot.id
+        data.push(calory)
       })
       setCalories(data)
     })()

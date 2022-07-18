@@ -4,15 +4,15 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 
-import { CaloryParams } from '../types/calory'
+import { FormModel } from '../types/calory'
 import { format } from 'date-fns'
 
 interface Props {
-  onSave: (form: CaloryParams) => void
+  onSave: (form: FormModel) => void
 }
 
 export default function CaloryList(props: Props) {
-  const { register, control, handleSubmit } = useForm<CaloryParams>()
+  const { register, control, handleSubmit } = useForm<FormModel>()
   const kinds = [
     {
       value: "breakfast",
@@ -32,7 +32,7 @@ export default function CaloryList(props: Props) {
     }
   ]
 
-  const onSubmit: SubmitHandler<CaloryParams> = (form) => {
+  const onSubmit: SubmitHandler<FormModel> = (form) => {
     form.date = format(new Date(form.date), 'yyyy-MM-dd')
     props.onSave(form)
   }
