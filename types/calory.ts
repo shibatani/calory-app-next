@@ -1,8 +1,4 @@
-export type caloryProps = {
-  calories: caloryParams[]
-}
-
-export type caloryParams = {
+export type CaloryParams = {
   title: string
   calory: number
   date: string

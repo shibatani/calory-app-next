@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { useState, ReactNode } from 'react'
+import { useRouter } from 'next/router'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -19,15 +19,25 @@ interface Props {
   window?: () => Window;
 }
 
-const navItems = ['List', 'New'];
+const navItems = [
+  {
+    name: '一覧',
+    path: '/calories'
+  },
+  {
+    name: '新規作成',
+    path: '/calories/new'
+  }
+]
 
-export default function DrawerAppBar(props: Props) {
+export default function Layout(props: Props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
+  }
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -37,9 +47,9 @@ export default function DrawerAppBar(props: Props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -71,8 +81,13 @@ export default function DrawerAppBar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+              <Button 
+                key={item.name} 
+                sx={{ color: '#fff' }} 
+                onClick={() => {
+                  router.push(item.path)
+                }}>
+                {item.name}
               </Button>
             ))}
           </Box>

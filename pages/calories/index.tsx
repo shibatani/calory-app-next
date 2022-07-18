@@ -3,8 +3,10 @@ import { collection, getDocs } from "firebase/firestore";
 import CaloryList from '../../components/caloryList'
 import db from '../../utils/fire'
 
-export default function Index() {
-  const [calories, setCalories] = useState([])
+import { CaloryParams } from '../../types/calory'
+
+export default function CaloriesListPage() {
+  const [calories, setCalories] = useState<CaloryParams[]>([])
 
   useEffect(() => {
     (async() => {
