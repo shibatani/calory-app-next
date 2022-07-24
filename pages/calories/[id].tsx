@@ -8,7 +8,7 @@ import { FormModel } from '../../types/calory'
 
 export default function CaloriesListPage() {
   const router = useRouter()
-  const id = router.query.id as string 
+  const [id, setId] = useState<string>()
   const [calory, setCalory] = useState<FormModel>({
     title: "",
     calory: 0,
@@ -17,23 +17,32 @@ export default function CaloriesListPage() {
   })
 
   useEffect(() => {
-    (async() => {
-      const docRef = doc(db, "calories", id)
-      const docSnap = await getDoc(docRef) as any
-      const data = docSnap.data()
-      setCalory({...data})
-    })()
-  }, [])
+    if (router.isReady) {
+      const id = router.query.id as string
+      setId(id);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        const docRef = doc(db, "calories", id)
+        const docSnap = await getDoc(docRef) as any
+        const data = docSnap.data()
+        setCalory({ ...data })
+      })()
+    }
+  }, [id])
 
   const onSave = async (form: FormModel) => {
     const docRef = doc(db, "calories", id);
-    await setDoc(docRef, {...form})
+    await setDoc(docRef, { ...form })
     router.push('/calories')
   }
 
   return (
     <div>
-      <CaloryForm formParams={calory} onSave={onSave}/>
+      <CaloryForm formParams={calory} onSave={onSave} />
     </div>
   )
 }
