@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react'
-import CaloryForm from '../../components/caloryForm'
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import db from '../../utils/fire'
 import { useRouter } from 'next/router'
+import { format } from 'date-fns'
 
+import CaloryForm from '../../components/caloryForm'
 import { FormModel } from '../../types/calory'
 
 export default function CaloriesListPage() {
   const router = useRouter()
   const [id, setId] = useState<string>()
   const [calory, setCalory] = useState<FormModel>({
-    title: "",
+    title: " ",
     calory: 0,
-    date: "",
-    kind: "",
+    date: format(new Date(), 'yyyy-MM-dd'),
+    kind: " ",
   })
 
   useEffect(() => {
