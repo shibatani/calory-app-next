@@ -1,11 +1,8 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useRouter } from 'next/router'
 
 import { CaloryParams } from '../types/calory'
 
@@ -14,35 +11,64 @@ type Props = {
 }
 
 export default function CaloryList(props: Props) {
+  const router = useRouter()
+  const columns: GridColDef[] = [
+    { field: 'title', headerName: '名前', width: 200, sortable: false },
+    { field: 'date', headerName: '日付', width: 200 },
+    { field: 'kind', headerName: '種別', width: 150, sortable: false },
+    { field: 'calory', headerName: 'カロリー(kcal)', width: 150 },
+    {
+      field: 'editBtn',
+      headerName: '',
+      sortable: false,
+      width: 30,
+      renderCell: (params) => {
+        return (
+          <IconButton
+            aria-label="edit"
+            onClick={(event) => {
+              onEdit(event, params.row)
+            }}
+          >
+            <EditIcon />
+          </IconButton>
+        )
+      }
+    },
+    {
+      field: ' deleteBtn',
+      headerName: '',
+      sortable: false,
+      width: 30,
+      renderCell: (params) => {
+        return (
+          <IconButton
+            aria-label="edit"
+            onClick={(event) => {
+              onEdit(event, params.row)
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        )
+      }
+    },
+  ]
+
+  const onEdit = (event, params: CaloryParams) => {
+    event.stopPropagation()
+    router.push(`/calories/${params.id}`)
+  }
+
   return (
-    <div>
-      <TableContainer sx={{ maxWidth: 800, margin: 'auto' }} component={Paper}>
-        <Table aria-label="simple table">
-        <TableHead>
-            <TableRow>
-              <TableCell>名前</TableCell>
-              <TableCell align="right">日付</TableCell>
-              <TableCell align="right">種別</TableCell>
-              <TableCell align="right">カロリー(kcal)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {props.calories.map((row) => (
-            <TableRow
-              key={row.title}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.title}
-              </TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right">{row.kind}</TableCell>
-              <TableCell align="right">{row.calory}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        </Table>
-      </TableContainer>
+    <div style={{ height: 550, maxWidth: 800, margin: 'auto' }}>
+      <DataGrid
+        rows={props.calories}
+        columns={columns}
+        pageSize={8}
+        rowsPerPageOptions={[25, 50, 100]}
+        disableSelectionOnClick
+      />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from 'react'
 import { Button, Stack, TextField, MenuItem } from '@mui/material'
 import { DesktopDatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -8,11 +9,21 @@ import { FormModel } from '../types/calory'
 import { format } from 'date-fns'
 
 interface Props {
+  formParams?: FormModel,
   onSave: (form: FormModel) => void
 }
 
 export default function CaloryList(props: Props) {
-  const { register, control, handleSubmit } = useForm<FormModel>()
+  const { register, control, handleSubmit, reset } = useForm<FormModel>({
+    defaultValues: useMemo(() => {
+      return props.formParams;
+    }, [props])
+  })
+
+  useEffect(() => {
+    reset(props.formParams);
+  }, [props.formParams]);
+
   const kinds = [
     {
       value: "breakfast",
