@@ -3,6 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/router'
+import db from '../utils/fire'
+import { doc, deleteDoc } from "firebase/firestore";
 
 import { CaloryParams } from '../types/calory'
 
@@ -45,7 +47,7 @@ export default function CaloryList(props: Props) {
           <IconButton
             aria-label="edit"
             onClick={(event) => {
-              onEdit(event, params.row)
+              onDelete(event, params.row)
             }}
           >
             <DeleteIcon />
@@ -58,6 +60,12 @@ export default function CaloryList(props: Props) {
   const onEdit = (event, params: CaloryParams) => {
     event.stopPropagation()
     router.push(`/calories/${params.id}`)
+  }
+
+  const onDelete = async (event, params: CaloryParams) => {
+    event.stopPropagation()
+    await deleteDoc(doc(db, "calories", params.id))
+    router.reload()
   }
 
   return (
