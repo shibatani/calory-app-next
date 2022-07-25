@@ -81,9 +81,9 @@ export default function Layout(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button 
-                key={item.name} 
-                sx={{ color: '#fff' }} 
+              <Button
+                key={item.name}
+                sx={{ color: '#fff' }}
                 onClick={() => {
                   router.push(item.path)
                 }}>

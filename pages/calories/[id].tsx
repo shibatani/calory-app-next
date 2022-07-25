@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import CaloryForm from '../../components/caloryForm'
 import { FormModel } from '../../types/calory'
 
-export default function CaloriesListPage() {
+export default function CaloriesDetailPage() {
   const router = useRouter()
   const [id, setId] = useState<string>()
   const [calory, setCalory] = useState<FormModel>({

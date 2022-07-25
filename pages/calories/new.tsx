@@ -9,13 +9,13 @@ export default function CaloriesNewPage() {
   const router = useRouter()
 
   const onSave = async (form: FormModel) => {
-    await addDoc(collection(db, "calories"), {...form})
+    await addDoc(collection(db, "calories"), { ...form })
     router.push('/calories')
   }
 
   return (
     <div>
-      <CaloryForm onSave={onSave}/>
+      <CaloryForm onSave={onSave} />
     </div>
   )
 }

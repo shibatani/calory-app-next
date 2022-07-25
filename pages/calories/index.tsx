@@ -9,7 +9,7 @@ export default function CaloriesListPage() {
   const [calories, setCalories] = useState<CaloryParams[]>([])
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       let data = []
       const caloriesSnapshot = await getDocs(collection(db, "calories"))
       caloriesSnapshot.forEach((calorySnapshot) => {

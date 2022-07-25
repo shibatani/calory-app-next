@@ -14,7 +14,7 @@ interface Props {
   onSave: (form: FormModel) => void
 }
 
-export default function CaloryList(props: Props) {
+export default function CaloryForm(props: Props) {
   const { register, control, handleSubmit, reset } = useForm<FormModel>({
     defaultValues: useMemo(() => {
       return props.formParams;
@@ -62,12 +62,12 @@ export default function CaloryList(props: Props) {
             name="date"
             control={control}
             defaultValue={format(new Date(), 'yyyy-MM-dd')}
-            render={({field}) => {
+            render={({ field }) => {
               return (
                 <DesktopDatePicker
                   {...field}
                   label="日付"
-                  renderInput={(params) => <TextField {...params}/>}
+                  renderInput={(params) => <TextField {...params} />}
                 />
               )
             }}
@@ -77,7 +77,7 @@ export default function CaloryList(props: Props) {
           name="kind"
           control={control}
           defaultValue={'breakfast'}
-          render={({field}) => {
+          render={({ field }) => {
             return (
               <TextField
                 {...field}
