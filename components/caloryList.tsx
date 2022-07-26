@@ -7,6 +7,7 @@ import db from '../utils/fire'
 import { doc, deleteDoc } from "firebase/firestore";
 
 import { CaloryParams } from '../types/calory'
+import Tag from './tag'
 
 type Props = {
   calories: CaloryParams[]
@@ -17,41 +18,43 @@ export default function CaloryList(props: Props) {
   const columns: GridColDef[] = [
     { field: 'title', headerName: '名前', width: 200, sortable: false },
     { field: 'date', headerName: '日付', width: 200 },
-    { field: 'kind', headerName: '種別', width: 150, sortable: false },
-    { field: 'calory', headerName: 'カロリー(kcal)', width: 150 },
     {
-      field: 'editBtn',
-      headerName: '',
+      field: 'kind',
+      headerName: '種別',
+      width: 150,
       sortable: false,
-      width: 30,
       renderCell: (params) => {
         return (
-          <IconButton
-            aria-label="edit"
-            onClick={(event) => {
-              onEdit(event, params.row)
-            }}
-          >
-            <EditIcon />
-          </IconButton>
+          <Tag kind={params.row.kind} />
         )
       }
     },
+    { field: 'calory', headerName: 'カロリー(kcal)', width: 150 },
     {
-      field: ' deleteBtn',
+      field: 'controlBtn',
       headerName: '',
       sortable: false,
-      width: 30,
+      width: 100,
       renderCell: (params) => {
         return (
-          <IconButton
-            aria-label="edit"
-            onClick={(event) => {
-              onDelete(event, params.row)
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          <div>
+            <IconButton
+              aria-label="edit"
+              onClick={(event) => {
+                onEdit(event, params.row)
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              aria-label="edit"
+              onClick={(event) => {
+                onDelete(event, params.row)
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </div> 
         )
       }
     },

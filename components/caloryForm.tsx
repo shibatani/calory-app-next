@@ -8,7 +8,6 @@ import { format } from 'date-fns'
 
 import { FormModel } from '../types/calory'
 
-
 interface Props {
   formParams?: FormModel,
   onSave: (form: FormModel) => void
