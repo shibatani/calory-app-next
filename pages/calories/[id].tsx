@@ -14,7 +14,7 @@ export default function CaloriesDetailPage() {
     title: " ",
     calory: 0,
     date: format(new Date(), 'yyyy-MM-dd'),
-    kind: "breakfast",
+    kind: 1,
   })
 
   useEffect(() => {

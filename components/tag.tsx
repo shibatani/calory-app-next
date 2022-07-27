@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Chip } from '@mui/material'
 
 type Props = {
-  kind: string
+  kind: number
 }
 
 type Tag = {
@@ -18,16 +18,16 @@ export default function Tag(props: Props) {
 
   useEffect(() => {
     switch (props.kind) {
-      case "breakfast":
+      case 1:
         setTag({ type: "success", label: "朝食" })
         break
-      case "lunch":
+      case 2:
         setTag({ type: "primary", label: "昼食" })
         break
-      case "dinner":
+      case 3:
         setTag({ type: "warning", label: "夕食" })
         break
-      case "other":
+      case 4:
         setTag({ type: "info", label: "その他" })
         break
       default:

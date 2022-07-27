@@ -3,7 +3,7 @@ export type CaloryParams = {
   title: string
   calory: number
   date: string
-  kind: string
+  kind: number
 }
 
 export type FormModel = Omit<CaloryParams, "id">

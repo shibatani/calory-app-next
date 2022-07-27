@@ -17,9 +17,20 @@ export default function CaloriesListPage() {
         calory["id"] = calorySnapshot.id
         data.push(calory)
       })
+      sortData(data)
       setCalories(data)
     })()
   }, [])
+
+  const sortData = (data: CaloryParams[]) => {
+    data.sort(function(a, b) {
+      if(a.date > b.date) return -1
+      if(a.date < b.date) return 1
+      if(a.kind > b.kind) return 1;
+      if(a.kind < b.kind) return -1;
+    })
+    return data
+  } 
 
   return (
     <div>

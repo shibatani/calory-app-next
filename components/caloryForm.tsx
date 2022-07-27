@@ -26,25 +26,25 @@ export default function CaloryForm(props: Props) {
 
   const kinds = [
     {
-      value: "breakfast",
+      value: 1,
       label: "朝食",
     },
     {
-      value: "lunch",
+      value: 2,
       label: "昼食",
     },
     {
-      value: "dinner",
+      value: 3,
       label: "夕食",
     },
     {
-      value: "other",
+      value: 4,
       label: "その他",
     }
   ]
 
   const onSubmit: SubmitHandler<FormModel> = (form) => {
-    form.date = format(new Date(form.date), 'yyyy-MM-dd')
+    form.date = format(new Date(form.date), 'yyyy/MM/dd')
     props.onSave(form)
   }
 
@@ -75,7 +75,7 @@ export default function CaloryForm(props: Props) {
         <Controller
           name="kind"
           control={control}
-          defaultValue={'breakfast'}
+          defaultValue={1}
           render={({ field }) => {
             return (
               <TextField

@@ -22,12 +22,7 @@ export default function CaloryList(props: Props) {
       field: 'kind',
       headerName: '種別',
       width: 150,
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Tag kind={params.row.kind} />
-        )
-      }
+      renderCell: (params) => <Tag kind={params.row.kind} />
     },
     { field: 'calory', headerName: 'カロリー(kcal)', width: 150 },
     {
@@ -78,16 +73,6 @@ export default function CaloryList(props: Props) {
         columns={columns}
         pageSize={8}
         rowsPerPageOptions={[25, 50, 100]}
-        initialState={{
-          sorting: {
-            sortModel: [
-              {
-                field: 'date',
-                sort: 'desc',
-              },
-            ],
-          },
-        }}
       />
     </div>
   )
