@@ -11,7 +11,7 @@
 - JSフレームワークにReact/Next.jsを導入している企業が主流になってきたため、学習してみようと思ったから。
 - React/Next.jsの入門書を一通り読み、初めてのアウトプットとして、[カロリー記録アプリ(Nuxt.js Ver)](https://github.com/shibatani/calory-app-nuxt)のリプレイスが難易度としては適切だと考えたから。
 - ReactとVueの違いを感じながら開発を行ないたい考えたから。
-- Realtime DatabaseとCloud Firestoreの違いを感じながら開発を行ないたい考えたから。
+- Realtime DatabaseとCloud Firestoreの違いを感じながら開発を行ないたいと考えたから。
 
 ## 工夫した点
 - 一覧画面に表示されている食べ物を食べた時間帯については、ラベルで表現するようにして、ユーザーが直感的に分かりやすくなるように工夫した。
