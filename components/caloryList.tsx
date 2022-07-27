@@ -78,7 +78,16 @@ export default function CaloryList(props: Props) {
         columns={columns}
         pageSize={8}
         rowsPerPageOptions={[25, 50, 100]}
-        disableSelectionOnClick
+        initialState={{
+          sorting: {
+            sortModel: [
+              {
+                field: 'date',
+                sort: 'desc',
+              },
+            ],
+          },
+        }}
       />
     </div>
   )
