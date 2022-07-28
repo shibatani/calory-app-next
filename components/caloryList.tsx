@@ -3,28 +3,41 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/router'
-import db from '../utils/fire'
-import { doc, deleteDoc } from "firebase/firestore";
 
 import { CaloryParams } from '../types/calory'
 import Tag from './tag'
 
 type Props = {
   calories: CaloryParams[]
+  onEdit: (params: CaloryParams) => void
+  onDelete: (params: CaloryParams) => void
 }
 
 export default function CaloryList(props: Props) {
   const router = useRouter()
   const columns: GridColDef[] = [
-    { field: 'title', headerName: '名前', width: 200, sortable: false },
-    { field: 'date', headerName: '日付', width: 200 },
+    { 
+      field: 'title', 
+      headerName: '名前', 
+      width: 200, 
+      sortable: false 
+    },
+    { 
+      field: 'date', 
+      headerName: '日付', 
+      width: 200 
+    },
     {
       field: 'kind',
       headerName: '種別',
       width: 150,
       renderCell: (params) => <Tag kind={params.row.kind} />
     },
-    { field: 'calory', headerName: 'カロリー(kcal)', width: 150 },
+    { 
+      field: 'calory', 
+      headerName: 'カロリー(kcal)', 
+      width: 150 
+    },
     {
       field: 'controlBtn',
       headerName: '',
@@ -57,13 +70,12 @@ export default function CaloryList(props: Props) {
 
   const onEdit = (event, params: CaloryParams) => {
     event.stopPropagation()
-    router.push(`/calories/${params.id}`)
+    props.onEdit(params)
   }
 
   const onDelete = async (event, params: CaloryParams) => {
     event.stopPropagation()
-    await deleteDoc(doc(db, "calories", params.id))
-    router.reload()
+    props.onDelete(params)
   }
 
   return (
