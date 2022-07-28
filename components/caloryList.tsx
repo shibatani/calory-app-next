@@ -3,8 +3,9 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { CaloryParams } from '../types/calory'
 import Tag from './tag'
+import { CaloryParams } from '../types/calory'
+
 
 type Props = {
   calories: CaloryParams[]
@@ -43,7 +44,7 @@ export default function CaloryList(props: Props) {
       width: 100,
       renderCell: (params) => {
         return (
-          <div>
+          <>
             <IconButton
               aria-label="edit"
               onClick={(event) => {
@@ -60,7 +61,7 @@ export default function CaloryList(props: Props) {
             >
               <DeleteIcon />
             </IconButton>
-          </div> 
+          </> 
         )
       }
     },

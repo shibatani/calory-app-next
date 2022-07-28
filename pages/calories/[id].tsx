@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import db from '../../utils/fire'
 import { useRouter } from 'next/router'
+
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { format } from 'date-fns'
 
+import db from '../../utils/fire'
 import CaloryForm from '../../components/caloryForm'
 import Loading from '../../plugins/loading'
 import { FormModel } from '../../types/calory'

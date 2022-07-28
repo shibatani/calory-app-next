@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { collection, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { useRouter } from 'next/router'
-import db from '../../utils/fire'
 
+import { collection, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore"
+
+import db from '../../utils/fire'
 import CaloryList from '../../components/caloryList'
 import Loading from '../../plugins/loading'
 import { CaloryParams } from '../../types/calory'

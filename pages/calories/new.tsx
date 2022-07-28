@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { collection, addDoc } from "firebase/firestore";
-import db from '../../utils/fire'
 
+import { collection, addDoc } from "firebase/firestore"
+
+import db from '../../utils/fire'
 import CaloryForm from '../../components/caloryForm'
 import Loading from '../../plugins/loading'
 import { FormModel } from '../../types/calory'
