@@ -49,7 +49,7 @@ export default function CaloryForm(props: Props) {
   }
 
   return (
-    <div>
+    <>
       <Stack spacing={3} sx={{ maxWidth: 800, margin: 'auto' }}>
         <TextField
           required
@@ -105,9 +105,9 @@ export default function CaloryForm(props: Props) {
           size="large"
           onClick={handleSubmit(onSubmit)}
         >
-          create
+          保存
         </Button>
       </Stack>
-    </div>
+    </>
   )
 }

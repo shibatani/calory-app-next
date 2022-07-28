@@ -41,13 +41,13 @@ export default function CaloriesListPage() {
   }
 
   return (
-    <div>
+    <>
       <CaloryList 
         calories={calories} 
         onEdit={onEdit} 
         onDelete={onDelete} 
       />
       <Loading progress={progress} />
-    </div>
+    </>
   )
 }

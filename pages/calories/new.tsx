@@ -19,9 +19,9 @@ export default function CaloriesNewPage() {
   }
 
   return (
-    <div>
+    <>
       <CaloryForm onSave={onSave} />
       <Loading progress={progress} />
-    </div>
+    </>
   )
 }

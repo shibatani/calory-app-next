@@ -2,7 +2,6 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useRouter } from 'next/router'
 
 import { CaloryParams } from '../types/calory'
 import Tag from './tag'
@@ -14,7 +13,6 @@ type Props = {
 }
 
 export default function CaloryList(props: Props) {
-  const router = useRouter()
   const columns: GridColDef[] = [
     { 
       field: 'title', 

@@ -37,8 +37,8 @@ export default function Tag(props: Props) {
   }, [props]);
   
   return (
-    <div>
+    <>
       <Chip label={tag.label} color={tag.type} size="small"></Chip>
-    </div>
+    </>
   )
 }

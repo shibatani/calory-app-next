@@ -48,9 +48,9 @@ export default function CaloriesDetailPage() {
   }
 
   return (
-    <div>
+    <>
       <CaloryForm formParams={calory} onSave={onSave} />
       <Loading progress={progress} />
-    </div>
+    </>
   )
 }
