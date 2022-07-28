@@ -6,7 +6,7 @@ type Props = {
 }
 
 type Tag = {
-  type: "default" | "primary" | "secondary" | "error" | "info" | "success" | "warning"
+  type: "default" | "primary" | "info" | "success" | "warning"
   label: string
 }
 
@@ -16,24 +16,15 @@ export default function Tag(props: Props) {
     label: ""
   })
 
+  const tags = {
+    1: { type: "success", label: "朝食" },
+    2: { type: "primary", label: "昼食" },
+    3: { type: "warning", label: "夕食" },
+    4: { type: "info", label: "その他" }
+  };
+
   useEffect(() => {
-    switch (props.kind) {
-      case 1:
-        setTag({ type: "success", label: "朝食" })
-        break
-      case 2:
-        setTag({ type: "primary", label: "昼食" })
-        break
-      case 3:
-        setTag({ type: "warning", label: "夕食" })
-        break
-      case 4:
-        setTag({ type: "info", label: "その他" })
-        break
-      default:
-        setTag({ type: "success", label: "その他" })
-        break
-    }
+    setTag(tags[props.kind])
   }, [props]);
   
   return (
