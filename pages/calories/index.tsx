@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import CaloryList from '../../components/caloryList'
 import db from '../../utils/fire'
 
@@ -11,26 +11,17 @@ export default function CaloriesListPage() {
   useEffect(() => {
     (async () => {
       let data = []
-      const caloriesSnapshot = await getDocs(collection(db, "calories"))
+      const caloriesRef = collection(db, "calories")
+      const q = query(caloriesRef, orderBy("date", "desc"), orderBy("kind"))
+      const caloriesSnapshot = await getDocs(q)
       caloriesSnapshot.forEach((calorySnapshot) => {
         const calory = calorySnapshot.data()
         calory["id"] = calorySnapshot.id
         data.push(calory)
       })
-      sortData(data)
       setCalories(data)
     })()
   }, [])
-
-  const sortData = (data: CaloryParams[]) => {
-    data.sort(function(a, b) {
-      if(a.date > b.date) return -1
-      if(a.date < b.date) return 1
-      if(a.kind > b.kind) return 1;
-      if(a.kind < b.kind) return -1;
-    })
-    return data
-  } 
 
   return (
     <div>
