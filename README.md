@@ -10,15 +10,14 @@
 ## アプリを作成した理由(技術観点)
 - JSフレームワークにReact/Next.jsを導入している企業が主流になってきたため、学習してみようと思ったから。
 - React/Next.jsの入門書を一通り読み、初めてのアウトプットとして、[カロリー記録アプリ(Nuxt.js Ver)](https://github.com/shibatani/calory-app-nuxt)のリプレイスが難易度としては適切だと考えたから。
-- ReactとVueの違いを感じながら開発を行ないたい考えたから。
-- Realtime DatabaseとCloud Firestoreの違いを感じながら開発を行ないたいと考えたから。
+- ReactとVueの違いを感じてみたいと考えたから。
+- Realtime DatabaseとCloud Firestoreの違いを感じてみたいとと考えたから。
 
 ## 工夫した点
 - 一覧画面に表示されている食べ物を食べた時間帯については、ラベルで表現するようにして、ユーザーが直感的に分かりやすくなるように工夫した。
 - 一覧画面に表示されている情報については、ただ情報を羅列するだけではユーザー体験が損なわれると感じたため、日付の降順かつ種別を朝食から夕食順に並び替えるように工夫した。
 
 ## まだ実装できていない部分
-- 非同期通信を行なっている間は、ローディングのアニメーションを入れて操作できないようにしたい。
 - 非同期通信を行なった後、メッセージを表示できるようにしたい。
 - 削除ボタンを押下後、確認モーダル表示するようにしたい。
 - 1日の合計摂取カロリーを表示できるようにしたい。
@@ -27,6 +26,7 @@
 ## 主要ライブラリのバージョン情報
 - Next 12.2.2
 - React 18.2.0
+- Redux 4.2.0
 - React Hook Form 7.33.1
 - @mui/material 5.9.0
 - TypeScript 4.7.4
@@ -47,13 +47,13 @@ $ yarn build
 
 ## 現時点でのアプリの挙動
 ### 日付の絞り込み
-https://user-images.githubusercontent.com/64350081/181151095-98b44536-905b-47dd-a9f7-14296724383d.mov
+https://user-images.githubusercontent.com/64350081/182015534-f0cd7251-7795-4050-a554-b25e7783dec3.mov
 
 ### 食べ物の登録
-https://user-images.githubusercontent.com/64350081/181151154-c2836039-9c6d-4363-aec4-244958357e9e.mov
+https://user-images.githubusercontent.com/64350081/182015549-59caf0e5-e52b-405e-b54e-68372ebe3028.mov
 
 ### 食べ物の編集
-https://user-images.githubusercontent.com/64350081/181151225-98f1134e-4b74-4735-a424-2464e36e005d.mov
+https://user-images.githubusercontent.com/64350081/182015570-201bf253-cd4b-4b68-bcee-85e8a611064e.mov
 
 ### 食べ物の削除
-https://user-images.githubusercontent.com/64350081/181151309-3668201f-f776-47d6-842d-33c2ea8973b7.mov
+https://user-images.githubusercontent.com/64350081/182015590-ac00b227-3701-4c92-b9b1-066f5e1bcd4b.mov
