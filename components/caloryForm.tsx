@@ -17,7 +17,7 @@ interface Props {
 export default function CaloryForm(props: Props) {
   const { register, control, handleSubmit, reset } = useForm<FormModel>({
     defaultValues: useMemo(() => {
-      return props.formParams;
+      return props.formParams
     }, [props])
   })
 

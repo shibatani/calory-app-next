@@ -7,3 +7,10 @@ export type CaloryParams = {
 }
 
 export type FormModel = Omit<CaloryParams, "id">
+
+export type CaloriesState = {
+  calories: CaloryParams[],
+  calory: FormModel,
+  loading: boolean,
+  error: null | string
+}

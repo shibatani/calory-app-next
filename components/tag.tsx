@@ -30,7 +30,7 @@ export default function Tag(props: Props) {
   
   return (
     <>
-      <Chip label={tag.label} color={tag.type} size="small"></Chip>
+      <Chip label={tag.label} color={tag.type} size="small" />
     </>
   )
 }

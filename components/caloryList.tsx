@@ -78,11 +78,11 @@ export default function CaloryList(props: Props) {
   }
 
   return (
-    <div style={{ height: 550, maxWidth: 800, margin: 'auto' }}>
+    <div style={{ height: 650, maxWidth: 800, margin: 'auto' }}>
       <DataGrid
         rows={props.calories}
         columns={columns}
-        pageSize={8}
+        pageSize={10}
         rowsPerPageOptions={[25, 50, 100]}
         disableSelectionOnClick
       />

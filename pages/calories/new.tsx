@@ -1,28 +1,26 @@
-import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { collection, addDoc } from "firebase/firestore"
-
-import db from '../../utils/fire'
 import CaloryForm from '../../components/caloryForm'
 import Loading from '../../plugins/loading'
 import { FormModel } from '../../types/calory'
+import { CaloriesState } from '../../types/calory'
+import { createCalory, DispatchCalories } from '../../store/calories'
 
 export default function CaloriesNewPage() {
   const router = useRouter()
-  const [progress, setProgress] = useState<boolean>(false)
+  const dispatch = useDispatch<DispatchCalories>()
+  const loading = useSelector((state: CaloriesState) => state.loading)
 
   const onSave = async (form: FormModel) => {
-    setProgress(true)
-    await addDoc(collection(db, "calories"), { ...form })
+    await dispatch(createCalory(form))
     router.push('/calories')
-    setProgress(false)
   }
 
   return (
     <>
       <CaloryForm onSave={onSave} />
-      <Loading progress={progress} />
+      <Loading loading={loading} />
     </>
   )
 }

@@ -1,33 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { collection, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore"
-
-import db from '../../utils/fire'
 import CaloryList from '../../components/caloryList'
 import Loading from '../../plugins/loading'
-import { CaloryParams } from '../../types/calory'
+import { CaloryParams, CaloriesState } from '../../types/calory'
+import { fetchCalories, DispatchCalories, deleteCalory } from '../../store/calories'
 
 export default function CaloriesListPage() {
   const router = useRouter()
-  const [calories, setCalories] = useState<CaloryParams[]>([])
-  const [progress, setProgress] = useState<boolean>(false)
+  const dispatch = useDispatch<DispatchCalories>()
+  const calories = useSelector((state: CaloriesState) => state.calories)
+  const loading = useSelector((state: CaloriesState) => state.loading)
 
   useEffect(() => {
-    (async () => {
-      let data = []
-      setProgress(true)
-      const caloriesRef = collection(db, "calories")
-      const q = query(caloriesRef, orderBy("date", "desc"), orderBy("kind"))
-      const caloriesSnapshot = await getDocs(q)
-      caloriesSnapshot.forEach((calorySnapshot) => {
-        const calory = calorySnapshot.data()
-        calory["id"] = calorySnapshot.id
-        data.push(calory)
-      })
-      setCalories(data)
-      setProgress(false)
-    })()
+    dispatch(fetchCalories()) 
   }, [])
 
   const onEdit = (params: CaloryParams) => {
@@ -35,10 +22,8 @@ export default function CaloriesListPage() {
   }
 
   const onDelete = async (params: CaloryParams) => {
-    setProgress(true)
-    await deleteDoc(doc(db, "calories", params.id))
+    await dispatch(deleteCalory(params.id))
     router.reload()
-    setProgress(false)
   }
 
   return (
@@ -48,7 +33,7 @@ export default function CaloriesListPage() {
         onEdit={onEdit} 
         onDelete={onDelete} 
       />
-      <Loading progress={progress} />
+      <Loading loading={loading} />
     </>
   )
 }

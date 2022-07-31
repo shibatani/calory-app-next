@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { format } from 'date-fns'
-
-import db from '../../utils/fire'
 import CaloryForm from '../../components/caloryForm'
 import Loading from '../../plugins/loading'
-import { FormModel } from '../../types/calory'
+import { FormModel, CaloriesState } from '../../types/calory'
+import { fetchCalory, updateCalory, DispatchCalories } from '../../store/calories'
 
 export default function CaloriesDetailPage() {
   const router = useRouter()
-  const [progress, setProgress] = useState<boolean>(false)
+  const dispatch = useDispatch<DispatchCalories>()
+  const calory = useSelector((state: CaloriesState) => state.calory)
+  const loading = useSelector((state: CaloriesState) => state.loading)
   const [id, setId] = useState<string>()
-  const [calory, setCalory] = useState<FormModel>({
-    title: " ",
-    calory: 0,
-    date: format(new Date(), 'yyyy-MM-dd'),
-    kind: 1,
-  })
 
   useEffect(() => {
     if (router.isReady) {
@@ -28,30 +22,18 @@ export default function CaloriesDetailPage() {
   }, [router]);
 
   useEffect(() => {
-    if (id) {
-      (async () => {
-        setProgress(true)
-        const docRef = doc(db, "calories", id)
-        const docSnap = await getDoc(docRef) as any
-        const data = docSnap.data()
-        setCalory({ ...data })
-        setProgress(false)
-      })()
-    }
+    if (id) dispatch(fetchCalory(id))
   }, [id])
 
   const onSave = async (form: FormModel) => {
-    setProgress(true)
-    const docRef = doc(db, "calories", id);
-    await setDoc(docRef, { ...form })
+    await dispatch(updateCalory({id, form}))
     router.push('/calories')
-    setProgress(false)
   }
 
   return (
     <>
       <CaloryForm formParams={calory} onSave={onSave} />
-      <Loading progress={progress} />
+      <Loading loading={loading} />
     </>
   )
 }
